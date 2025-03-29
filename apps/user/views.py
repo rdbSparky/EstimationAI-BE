@@ -5,12 +5,14 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.hashers import make_password
 from .models import User
 from .serializers import UserSignUpSerializer
+from rest_framework.permissions import AllowAny
 
 class UserSignUpAPIView(generics.GenericAPIView):
     """
     API View for User Signup with JWT token response
     """
     serializer_class = UserSignUpSerializer
+    permission_classes = [AllowAny,]
     
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
